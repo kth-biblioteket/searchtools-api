@@ -3,7 +3,7 @@ version: "3.6"
 services:
   searchtools-api:
     container_name: searchtools-api
-    image: getmeili/meilisearch:latest
+    image: getmeili/meilisearch:v1.0.2
     restart: always
     env_file:
       - ./searchtools-api.env
