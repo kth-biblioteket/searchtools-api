@@ -1,0 +1,26 @@
+version: "3.6"
+
+services:
+  searchtools-api:
+    container_name: searchtools-api
+    image: getmeili/meilisearch:latest
+    restart: always
+    env_file:
+      - ./searchtools-api.env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.searchtools-api.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`${PATHPREFIX}`)"
+      - "traefik.http.routers.searchtools-api.middlewares=searchtools-api-stripprefix"
+      - "traefik.http.middlewares.searchtools-api-stripprefix.stripprefix.prefixes=${PATHPREFIX}"
+      - "traefik.http.routers.searchtools-api.entrypoints=websecure"
+      - "traefik.http.routers.searchtools-api.tls=true"
+      - "traefik.http.routers.searchtools-api.tls.certresolver=myresolver"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${MEILI_DATA}:/meili_data
+    networks:
+      - "apps-net"
+
+networks:
+  apps-net:
+    external: true
