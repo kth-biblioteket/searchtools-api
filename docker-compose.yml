@@ -3,7 +3,8 @@ version: "3.6"
 services:
   searchtools-api:
     container_name: searchtools-api
-    image: getmeili/meilisearch:latest
+    #image: getmeili/meilisearch:latest
+    image: ghcr.io/kth-biblioteket/searchtools-api:${REPO_TYPE}
     restart: always
     env_file:
       - ./searchtools-api.env
