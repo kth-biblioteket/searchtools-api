@@ -93,9 +93,9 @@ curl \
   -H 'Authorization: Bearer xxx' \
   --data-binary '{
       "filterableAttributes": [
-          "Enamn",
+          "Befattning",
           "Orgnamn",
-          "Bef_ben"
+          "Skola"
       ]
   }'
 
